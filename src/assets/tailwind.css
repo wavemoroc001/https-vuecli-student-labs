@@ -3,3 +3,14 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.topic {
+  @apply text-base text-fuchsia-500 tracking-wider font-semibold;
+}
+
+.banner {
+  @apply flex flex-col items-center justify-center;
+}
+.logo {
+  @apply w-24 h-24;
+}
