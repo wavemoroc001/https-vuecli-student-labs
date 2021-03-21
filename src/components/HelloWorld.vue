@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>{{ msg }}</h1>
+  <div class="container">
+    <h1 class="topic">{{ msg }}</h1>
     <p class="text-sea">
       with TailwindCSS Framework
       <span class="text-salmon-dark">and custom salmon color</span>
