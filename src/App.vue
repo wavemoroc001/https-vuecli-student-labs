@@ -9,7 +9,7 @@
       <div class="container">
         <div class="survey-container">
           <form @submit.prevent="submitForm">
-            <div>
+            <base-card>
               <h2 class="heading">
                 How was your Vue.js learning experience?
               </h2>
@@ -28,9 +28,9 @@
               <p v-if="invalidNameInput" class="text-red-500">
                 Please enter your name!
               </p>
-            </div>
+            </base-card>
 
-            <div>
+            <base-card>
               <h2 class="heading">My learning experience was ...</h2>
 
               <div>
@@ -68,7 +68,8 @@
               <p v-if="invalidRatingInput" class="text-red-500">
                 Please choose your learning experience!
               </p>
-            </div>
+            </base-card>
+
             <button class="btn">
               Submit
             </button>
@@ -81,11 +82,12 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+import BaseCard from './components/BaseCard.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    BaseCard
   },
   data() {
     return {
