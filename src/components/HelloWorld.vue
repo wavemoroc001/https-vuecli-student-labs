@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="banner">
     <h1>{{ msg }}</h1>
     <p class="text-sea">
       with TailwindCSS Framework
