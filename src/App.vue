@@ -76,6 +76,18 @@
           </form>
         </div>
       </div>
+
+      <div class="container">
+        <base-card>
+          <ul v-for="result in surveyResults" :key="result.id">
+            <li>
+              <span class="text-purple-600 italic">{{ result.name }}</span>
+              rated the learning experience
+              <span class="text-green-600 italic">{{ result.rating }}</span>
+            </li>
+          </ul>
+        </base-card>
+      </div>
     </div>
   </div>
 </template>
@@ -93,7 +105,19 @@ export default {
       enteredName: '',
       rating: null,
       invalidNameInput: false,
-      invalidRatingInput: false
+      invalidRatingInput: false,
+      surveyResults: [
+        // {
+        //   id: 1,
+        //   name: 'Umaporn',
+        //   rating: 'Great'
+        // },
+        // {
+        //   id: 2,
+        //   name: 'Suda',
+        //   rating: 'Average'
+        // }
+      ]
     }
   },
   methods: {
@@ -110,7 +134,15 @@ export default {
     validateName() {
       this.invalidNameInput = this.enteredName === '' ? true : false
       console.log(`name: ${this.invalidNameInput}`)
+    },
+    async fetchSurveyResult() {
+      const res = await fetch('http://localhost:5000/surveyResults')
+      const data = await res.json()
+      return data
     }
+  },
+  async created() {
+    this.surveyResults = await this.fetchSurveyResult()
   }
 }
 </script>
