@@ -9,7 +9,11 @@
       <div class="container">
         <add-survey @survey-submit="addNewSurvey"></add-survey>
       </div>
-
+      <div class="container">
+        <p v-if="errorMessage" class="text-red-500">
+          {{ errorMessage }}
+        </p>
+      </div>
       <div class="container">
         <base-card>
           <ul v-for="result in surveyResults" :key="result.id">
@@ -36,6 +40,8 @@ export default {
   },
   data() {
     return {
+      url: ' http://localhost:5000/surveyResults',
+      errorMessage: null,
       surveyResults: [
         // {
         //   id: 1,
@@ -51,14 +57,67 @@ export default {
     }
   },
   methods: {
-    addNewSurvey(newSurvey) {
-      this.surveyResults.id = new Date().toISOString()
-      this.surveyResults.name = newSurvey.name
-      this.surveyResults.id = newSurvey.rating
-      this.surveyResults.push(newSurvey)
+    ///*add to variable in memory
+    // addNewSurvey(newSurvey) {
+    //   this.surveyResults.id = new Date().toISOString()
+    //   this.surveyResults.name = newSurvey.name
+    //   this.surveyResults.rating = newSurvey.rating
+    //   this.surveyResults.push(newSurvey)
+    // },
+
+    ///* using promise.then() and promise.catch()
+    // addNewSurvey(newSurvey) {
+    //   this.surveyResults.name = newSurvey.name
+    //   this.surveyResults.rating = newSurvey.rating
+    //   this.errorMessage = null
+    //   fetch(this.url, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       name: newSurvey.name,
+    //       rating: newSurvey.rating
+    //     })
+    //     // body: {
+    //     //   name: newSurvey.name,
+    //     //   rating: newSurvey.rating
+    //     // }
+    //   })
+    //     .then((response) => {
+    //       if (response.ok) {
+    //         console.log('your survey added successfully')
+    //       } else {
+    //         throw new Error('Could not add your survey!')
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //       this.errorMessage = error.message
+    //     })
+    // },
+
+    ///* or alternatilly using async-await
+    async addNewSurvey(newSurvey) {
+      const res = await fetch(this.url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: newSurvey.name,
+          rating: newSurvey.rating
+        })
+      })
+      const data = await res.json()
+      //spread array
+      this.surveyResults = [...this.surveyResults, data]
+      //or add new item to the end of array
+      // this.surveyResults.push(data)
     },
+
     async fetchSurveyResult() {
-      const res = await fetch('http://localhost:5000/surveyResults')
+      const res = await fetch(this.url)
       const data = await res.json()
       // parses JSON response into native JavaScript objects
       return data
