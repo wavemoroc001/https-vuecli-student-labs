@@ -70,9 +70,15 @@
               </p>
             </base-card>
 
-            <button class="btn">
+            <!-- <button class="btn">
               Submit
-            </button>
+            </button> -->
+            <base-button
+              @btn-click="submitForm"
+              bgcolor="bg-purple-900"
+              txtcolor="text-white"
+              label="Submit"
+            ></base-button>
           </form>
         </div>
       </div>
@@ -107,21 +113,22 @@ export default {
       invalidNameInput: false,
       invalidRatingInput: false,
       surveyResults: [
-        // {
-        //   id: 1,
-        //   name: 'Umaporn',
-        //   rating: 'Great'
-        // },
-        // {
-        //   id: 2,
-        //   name: 'Suda',
-        //   rating: 'Average'
-        // }
+        {
+          id: 1,
+          name: 'Umaporn',
+          rating: 'Great'
+        },
+        {
+          id: 2,
+          name: 'Suda',
+          rating: 'Average'
+        }
       ]
     }
   },
   methods: {
     submitForm() {
+      // alert('submit form')
       this.invalidNameInput = this.enteredName === '' ? true : false
       this.invalidRatingInput = this.rating === null ? true : false
 
