@@ -15,15 +15,29 @@
         </p>
       </div>
       <div class="container">
-        <base-card>
-          <ul v-for="result in surveyResults" :key="result.id">
-            <li>
-              <span class="text-purple-600 italic">{{ result.name }}</span>
-              rated the learning experience
-              <span class="text-green-600 italic">{{ result.rating }}</span>
-            </li>
-          </ul>
-        </base-card>
+        <ul v-for="result in surveyResults" :key="result.id">
+          <base-card>
+            <div class="flex flex-row items-center">
+              <li class="p-2">
+                <span class="text-purple-600 italic">{{ result.name }}</span>
+                rated the learning experience
+                <span class="text-green-600 italic">{{ result.rating }}</span>
+              </li>
+              <div class="flex flex-col">
+                <base-button
+                  bgcolor="bg-green-500"
+                  txtcolor="text-white"
+                  label="Edit"
+                ></base-button>
+                <base-button
+                  bgcolor="bg-red-600"
+                  txtcolor="text-white"
+                  label="x"
+                ></base-button>
+              </div>
+            </div>
+          </base-card>
+        </ul>
       </div>
     </div>
   </div>

@@ -6,6 +6,7 @@
 <script>
 export default {
   props: ['bgcolor', 'txtcolor', 'label'],
+
   emits: ['btn-click'],
   methods: {
     buttonClick() {

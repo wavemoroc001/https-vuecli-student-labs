@@ -11,44 +11,14 @@
       "rating": "Average"
     },
     {
-      "name": "Khajonsak",
-      "rating": "average",
+      "name": "Ada",
+      "rating": "Average",
       "id": 3
     },
     {
-      "name": "Mary",
+      "name": "Pongchai",
       "rating": "poor",
       "id": 4
-    },
-    {
-      "name": "Susan",
-      "rating": "average",
-      "id": 5
-    },
-    {
-      "name": "donald",
-      "rating": "average",
-      "id": 6
-    },
-    {
-      "name": "pida",
-      "rating": "average",
-      "id": 7
-    },
-    {
-      "name": "AA",
-      "rating": "poor",
-      "id": 8
-    },
-    {
-      "name": "BB",
-      "rating": "average",
-      "id": 9
-    },
-    {
-      "name": "CC",
-      "rating": "average",
-      "id": 10
     }
   ]
 }
