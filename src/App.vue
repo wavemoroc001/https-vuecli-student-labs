@@ -25,11 +25,13 @@
               </li>
               <div class="flex flex-col">
                 <base-button
+                  @btn-click="editSurvey"
                   bgcolor="bg-green-500"
                   txtcolor="text-white"
                   label="Edit"
                 ></base-button>
                 <base-button
+                  @btn-click="deleteSurvey($event, result.id)"
                   bgcolor="bg-red-600"
                   txtcolor="text-white"
                   label="x"
@@ -135,6 +137,19 @@ export default {
       const data = await res.json()
       // parses JSON response into native JavaScript objects
       return data
+    },
+
+    async deleteSurvey(label, id) {
+      if (confirm(`Are you sure to ${label}?`)) {
+        const res = await fetch(`${this.url}/${id}`, {
+          method: 'DELETE'
+        })
+        res.status === 200
+          ? (this.surveyResult = this.surveyResults.filter(
+              (survey) => survey.id !== id
+            ))
+          : alert('Error to delete survey')
+      }
     }
   },
   async created() {
