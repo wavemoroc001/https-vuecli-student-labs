@@ -32,6 +32,7 @@
             id="rating-poor"
             value="poor"
             v-model="rating"
+            :checked="rating === 'poor'"
           />
           <label class="label" for="rating-poor">Poor</label>
         </div>
@@ -43,6 +44,7 @@
             id="rating-avg"
             value="average"
             v-model="rating"
+            :checked="rating === 'average'"
           />
           <label class="label" for="rating-avg">Average</label>
         </div>
@@ -54,6 +56,7 @@
             id="rating-great"
             value="great"
             v-model="rating"
+            :checked="rating === 'great'"
           />
           <label class="label" for="rating-great">Great</label>
         </div>
@@ -72,11 +75,34 @@
 </template>
 <script>
 export default {
+  props: {
+    // editable: {
+    //   type: Boolean,
+    //   required: false,
+    //   default: false
+    // },
+    oldId: {
+      type: Number,
+      required: false,
+      default: null
+    },
+    oldName: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    oldRating: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
   emits: ['survey-submit'],
   data() {
     return {
-      enteredName: '',
-      rating: null,
+      id: this.oldId,
+      enteredName: this.oldName,
+      rating: this.oldRating,
       invalidNameInput: false,
       invalidRatingInput: false
     }
@@ -90,14 +116,17 @@ export default {
       console.log(`rating value: ${this.rating}`)
       console.log(`invalid name: ${this.invalidNameInput}`)
       console.log(`invalid rating: ${this.invalidRatingInput}`)
-
-      const newSurveySubmitted = {
-        name: this.enteredName,
-        rating: this.rating
+      if (!this.invalidNameInput && !this.invalidRatingInput) {
+        const newSurveySubmitted = {
+          id: this.id,
+          name: this.enteredName,
+          rating: this.rating
+        }
+        this.id = ''
+        this.enteredName = ''
+        this.rating = null
+        this.$emit('survey-submit', newSurveySubmitted)
       }
-      this.enteredName = ''
-      this.rating = null
-      this.$emit('survey-submit', newSurveySubmitted)
     },
 
     validateName() {

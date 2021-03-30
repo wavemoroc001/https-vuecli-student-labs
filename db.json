@@ -1,14 +1,19 @@
 {
   "surveyResults": [
     {
-      "id": 2,
-      "name": "Suda",
-      "rating": "Average"
+      "name": "Ada1",
+      "rating": "poor",
+      "id": 2
     },
     {
-      "id": 3,
-      "name": "Ada",
-      "rating": "Average"
+      "name": "Ponchai2",
+      "rating": "great",
+      "id": 3
+    },
+    {
+      "name": "Khajonsak1",
+      "rating": "poor",
+      "id": 5
     }
   ]
 }

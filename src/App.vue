@@ -5,15 +5,26 @@
         <img class="logo" alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to VueCLI project" />
       </div>
-
+      <!-- add or edit survey -->
       <div class="container">
-        <add-survey @survey-submit="addNewSurvey"></add-survey>
+        <add-survey
+          v-if="isEdit"
+          :oldId="oldId"
+          :oldName="oldName"
+          :oldRating="oldRating"
+          @survey-submit="editSubmit"
+        ></add-survey>
+
+        <add-survey v-else @survey-submit="addNewSurvey"></add-survey>
       </div>
+
       <div class="container">
         <p v-if="errorMessage" class="text-red-500">
           {{ errorMessage }}
         </p>
       </div>
+
+      <!-- display all survey result -->
       <div class="container">
         <ul v-for="result in surveyResults" :key="result.id">
           <base-card>
@@ -23,9 +34,12 @@
                 rated the learning experience
                 <span class="text-green-600 italic">{{ result.rating }}</span>
               </li>
+              <!-- :isEdit="isEdit" -->
               <div class="flex flex-col">
                 <base-button
-                  @btn-click="editSurvey($event, result.id)"
+                  @btn-click="
+                    editSurvey($event, result.id, result.name, result.rating)
+                  "
                   bgcolor="bg-green-500"
                   txtcolor="text-white"
                   label="edit"
@@ -59,6 +73,9 @@ export default {
     return {
       url: ' http://localhost:5000/surveyResults',
       errorMessage: null,
+      oldId: '',
+      oldName: '',
+      oldRating: null,
       surveyResults: [
         // {
         //   id: 1,
@@ -70,7 +87,8 @@ export default {
         //   name: 'Suda',
         //   rating: 'Average'
         // }
-      ]
+      ],
+      isEdit: false
     }
   },
   methods: {
@@ -151,11 +169,43 @@ export default {
             ))
           : alert('Error to delete survey')
       }
+    },
+    editSurvey(passingData, editId, editName, editRating) {
+      // this.isEdit = passingData.isEdit
+      this.isEdit = true
+      this.oldId = editId
+      this.oldName = editName
+      this.oldRating = editRating
+
+      alert(
+        ` ${passingData.label} mode: ${this.isEdit}, you want to edit current data {id: ${editId}, name: ${editName}, rating: ${editRating}}`
+      )
+    },
+    async editSubmit(editingData) {
+      const res = await fetch(`${this.url}/${editingData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: editingData.name,
+          rating: editingData.rating
+        })
+      })
+      const data = await res.json()
+      this.surveyResults = this.surveyResults.map((survey) =>
+        survey.id === data.id
+          ? {
+              ...survey,
+              name: data.name,
+              rating: data.rating
+            }
+          : survey
+      )
+      this.isEdit = false
     }
   },
-  editSurvey(passingData, id) {
-    alert(`${passingData.isEdit}, ${passingData.label}, ${id}`)
-  },
+
   async created() {
     this.surveyResults = await this.fetchSurveyResult()
   }
