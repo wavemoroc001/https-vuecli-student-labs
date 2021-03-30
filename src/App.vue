@@ -145,7 +145,7 @@ export default {
           method: 'DELETE'
         })
         res.status === 200
-          ? (this.surveyResult = this.surveyResults.filter(
+          ? (this.surveyResults = this.surveyResults.filter(
               (survey) => survey.id !== id
             ))
           : alert('Error to delete survey')
