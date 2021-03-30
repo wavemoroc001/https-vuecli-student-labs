@@ -1,6 +1,8 @@
 <template>
   <button @click="buttonClick" class="btn" :class="[bgcolor, txtcolor]">
-    {{ label }}
+    <slot>
+      {{ label }}
+    </slot>
   </button>
 </template>
 <script>

@@ -28,8 +28,8 @@
                   @btn-click="editSurvey"
                   bgcolor="bg-green-500"
                   txtcolor="text-white"
-                  label="Edit"
-                ></base-button>
+                  ><img src="./assets/edit.svg"
+                /></base-button>
                 <base-button
                   @btn-click="deleteSurvey($event, result.id)"
                   bgcolor="bg-red-600"
