@@ -25,9 +25,10 @@
               </li>
               <div class="flex flex-col">
                 <base-button
-                  @btn-click="editSurvey"
+                  @btn-click="editSurvey($event, result.id)"
                   bgcolor="bg-green-500"
                   txtcolor="text-white"
+                  label="edit"
                   ><img src="./assets/edit.svg"
                 /></base-button>
                 <base-button
@@ -139,18 +140,21 @@ export default {
       return data
     },
 
-    async deleteSurvey(label, id) {
-      if (confirm(`Are you sure to ${label}?`)) {
+    async deleteSurvey(passingData, id) {
+      if (confirm(`Are you sure to delete (${passingData.label})?`)) {
         const res = await fetch(`${this.url}/${id}`, {
           method: 'DELETE'
         })
         res.status === 200
-          ? (this.surveyResult = this.surveyResults.filter(
+          ? (this.surveyResults = this.surveyResults.filter(
               (survey) => survey.id !== id
             ))
           : alert('Error to delete survey')
       }
     }
+  },
+  editSurvey(passingData, id) {
+    alert(`${passingData.isEdit}, ${passingData.label}, ${id}`)
   },
   async created() {
     this.surveyResults = await this.fetchSurveyResult()

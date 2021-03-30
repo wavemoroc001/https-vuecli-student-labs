@@ -9,11 +9,6 @@
       "id": 3,
       "name": "Ada",
       "rating": "Average"
-    },
-    {
-      "name": "Pongchai",
-      "rating": "poor",
-      "id": 4
     }
   ]
 }
