@@ -70,7 +70,7 @@
               </p>
             </base-card>
 
-            <base-button bgcolor="bg-green-700" label="Save!"  txtcolor="text-white"
+            <base-button bg-color="bg-yellow-300" label="Save!"  txt-color="text-black"
             />
           </form>
         </div>

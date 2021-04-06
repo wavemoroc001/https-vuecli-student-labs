@@ -1,17 +1,17 @@
 <template>
-  <button class="rounded-lg shadow-lg py-2 px-3" @click="this.$emit('action')" :class="[txtcolor,bgcolor]">
+  <button class="rounded-lg shadow-lg py-2 px-3" @click="this.$emit('action')" :class="[txtColor,bgColor]">
     {{ label }}
   </button>
 </template>
 <script>
 export default {
     props : {
-        bgcolor : {
+        bgColor : {
             //require : true,
             type : String,
             default: 'bg-grey-400'
         },
-        txtcolor : {
+        txtColor : {
             //require : true,
             type : String,
             default : 'text-red-600'
