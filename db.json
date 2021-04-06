@@ -1,0 +1,24 @@
+{
+  "surveyResults": [
+    { "id": 1, "name": "Umaporn", "rating": "Great" },
+    { "id": 2, "name": "Suda", "rating": "Average" },
+    { "id": 3, "name": "Lucky", "rating": "Average" },
+    { "id": 4, "name": "Jeab", "rating": "Great" },
+    { "id": 5, "name": "Kampol", "rating": "Poor" },
+    { "id": 6, "name": "Jean", "rating": "Average" },
+    { "id": 7, "name": "Cake", "rating": "Great" },
+    { "id": 8, "name": "Cat", "rating": "Great" },
+    { "id": 9, "name": "Chesse", "rating": "Great" },
+    { "id": 10, "name": "Poon", "rating": "Great" },
+    { "id": 11, "name": "Chopper", "rating": "Great" },
+    { "id": 12, "name": "Copter", "rating": "Great" },
+    { "id": 13, "name": "Lon", "rating": "Great" },
+    { "id": 14, "name": "KK", "rating": "Great" },
+    { "id": 15, "name": "Don", "rating": "Great" },
+    { "id": 16, "name": "Mirro", "rating": "Great" },
+    { "id": 17, "name": "Cake", "rating": "Great" },
+    { "id": 18, "name": "Cake", "rating": "Poor" },
+    { "id": 19, "name": "Cake", "rating": "Average" },
+    { "id": 20, "name": "Bew", "rating": "Great" }
+  ]
+}

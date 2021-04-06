@@ -74,6 +74,14 @@
               Submit
             </button>
           </form>
+          <base-card>
+            <h2>Survey Result</h2>
+            <div v-for="index,survey in SuveyResult" :key=survey.id>
+              <span>index</span>
+              <span>survey.name</span>
+              <span>survey.rating</span>
+            </div>
+          </base-card>
         </div>
       </div>
     </div>
@@ -81,36 +89,48 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BaseCard from "./components/BaseCard.vue";
+import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    HelloWorld,
+    BaseCard,
   },
   data() {
     return {
-      enteredName: '',
+      enteredName: "",
       rating: null,
       invalidNameInput: false,
-      invalidRatingInput: false
-    }
+      invalidRatingInput: false,
+      SurveyResult : [],
+      url : 'http://localhost:5000/surveyResults'
+    };
   },
   methods: {
     submitForm() {
-      this.invalidNameInput = this.enteredName === '' ? true : false
-      this.invalidRatingInput = this.rating === null ? true : false
+      this.invalidNameInput = this.enteredName === "" ? true : false;
+      this.invalidRatingInput = this.rating === null ? true : false;
 
-      console.log(`name value: ${this.enteredName}`)
-      console.log(`rating value: ${this.rating}`)
-      console.log(`invalid name: ${this.invalidNameInput}`)
-      console.log(`invalid rating: ${this.invalidRatingInput}`)
+      console.log(`name value: ${this.enteredName}`);
+      console.log(`rating value: ${this.rating}`);
+      console.log(`invalid name: ${this.invalidNameInput}`);
+      console.log(`invalid rating: ${this.invalidRatingInput}`);
     },
 
     validateName() {
-      this.invalidNameInput = this.enteredName === '' ? true : false
-      console.log(`name: ${this.invalidNameInput}`)
+      this.invalidNameInput = this.enteredName === "" ? true : false;
+      console.log(`name: ${this.invalidNameInput}`);
+    },
+    async fetchSurveyResult () {
+      const res = await fetch(this.url);
+      const data = await res.json();
+      return data
+    },
+    async created () {
+      this.SurveyResult = await this.fetchSurveyResult();
     }
-  }
-}
+  },
+};
 </script>
