@@ -74,13 +74,26 @@
               Submit
             </button>
           </form>
-          <base-card>
-            <h2>Survey Result</h2>
-            <div v-for="index,survey in SuveyResult" :key=survey.id>
-              <span>index</span>
-              <span>survey.name</span>
-              <span>survey.rating</span>
-            </div>
+          <base-card class="p-4 space-y-2">
+            <h2 class="font-medium text-2xl">Survey Result</h2>
+            <table class="table-auto justify-items-center border-collapse">
+              <thead>
+                <tr>
+                  <td class="bb">Index</td>
+                  <td class="bb">Name</td>
+                  <td class="bb">Rating</td>
+                </tr>
+              </thead>
+              <tr
+                v-for="(survey, index) in SurveyResult"
+                :key="survey.id"
+                class="space-x-2"
+              >
+                <td class="bb" :class="{'bg-gray-200' : index%2 === 0}">{{ index }}</td>
+                <td class="bb" :class="{'bg-gray-200' : index%2 === 0}">{{ survey.name }}</td>
+                <td class="bb" :class="{'bg-gray-200' : index%2 === 0}">{{ survey.rating }}</td>
+              </tr>
+            </table>
           </base-card>
         </div>
       </div>
@@ -104,8 +117,8 @@ export default {
       rating: null,
       invalidNameInput: false,
       invalidRatingInput: false,
-      SurveyResult : [],
-      url : 'http://localhost:5000/surveyResults'
+      SurveyResult: [],
+      url: "http://localhost:5000/surveyResults",
     };
   },
   methods: {
@@ -123,14 +136,14 @@ export default {
       this.invalidNameInput = this.enteredName === "" ? true : false;
       console.log(`name: ${this.invalidNameInput}`);
     },
-    async fetchSurveyResult () {
+    async fetchSurveyResult() {
       const res = await fetch(this.url);
       const data = await res.json();
-      return data
+      return data;
     },
-    async created () {
-      this.SurveyResult = await this.fetchSurveyResult();
-    }
+  },
+  async created() {
+    this.SurveyResult = await this.fetchSurveyResult();
   },
 };
 </script>
