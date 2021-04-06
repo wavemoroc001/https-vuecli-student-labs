@@ -70,9 +70,8 @@
               </p>
             </base-card>
 
-            <button class="btn">
-              Submit
-            </button>
+            <base-button bgcolor="bg-green-700" label="Save!"  txtcolor="text-white"
+            />
           </form>
         </div>
       </div>
@@ -93,16 +92,18 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import BaseButton from "./components/UI/BaseButton.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    HelloWorld,
+    BaseButton,
   },
   data() {
     return {
-      enteredName: '',
+      enteredName: "",
       rating: null,
       invalidNameInput: false,
       invalidRatingInput: false,
@@ -117,32 +118,32 @@ export default {
         //   name: 'Suda',
         //   rating: 'Average'
         // }
-      ]
-    }
+      ],
+    };
   },
   methods: {
     submitForm() {
-      this.invalidNameInput = this.enteredName === '' ? true : false
-      this.invalidRatingInput = this.rating === null ? true : false
+      this.invalidNameInput = this.enteredName === "" ? true : false;
+      this.invalidRatingInput = this.rating === null ? true : false;
 
-      console.log(`name value: ${this.enteredName}`)
-      console.log(`rating value: ${this.rating}`)
-      console.log(`invalid name: ${this.invalidNameInput}`)
-      console.log(`invalid rating: ${this.invalidRatingInput}`)
+      console.log(`name value: ${this.enteredName}`);
+      console.log(`rating value: ${this.rating}`);
+      console.log(`invalid name: ${this.invalidNameInput}`);
+      console.log(`invalid rating: ${this.invalidRatingInput}`);
     },
 
     validateName() {
-      this.invalidNameInput = this.enteredName === '' ? true : false
-      console.log(`name: ${this.invalidNameInput}`)
+      this.invalidNameInput = this.enteredName === "" ? true : false;
+      console.log(`name: ${this.invalidNameInput}`);
     },
     async fetchSurveyResult() {
-      const res = await fetch('http://localhost:5000/surveyResults')
-      const data = await res.json()
-      return data
-    }
+      const res = await fetch("http://localhost:5000/surveyResults");
+      const data = await res.json();
+      return data;
+    },
   },
   async created() {
-    this.surveyResults = await this.fetchSurveyResult()
-  }
-}
+    this.surveyResults = await this.fetchSurveyResult();
+  },
+};
 </script>
