@@ -68,17 +68,6 @@
         label="Submit"
       ></base-button>
     </form>
-    <div class="container">
-      <base-card>
-        <ul v-for="result in surveyResults" :key="result.id">
-          <li>
-            <span class="text-purple-600 italic">{{ result.name }}</span>
-            rated the learning experience
-            <span class="text-green-600 italic">{{ result.rating }}</span>
-          </li>
-        </ul>
-      </base-card>
-    </div>
   </div>
 </template>
 <script>
@@ -89,7 +78,7 @@ export default {
       rating: null,
       invalidNameInput: false,
       invalidRatingInput: false,
-      surveyResults: [
+      //surveyResults: [
         // {
         //   id: 1,
         //   name: "Umaporn",
@@ -100,11 +89,11 @@ export default {
         //   name: "Suda",
         //   rating: "Average",
         // },
-      ],
+      //]
     };
   },
   props: {
-    fetchSurveyResults: Object,
+    countNumber: Number,
   },
   methods: {
     submitForm() {
@@ -114,34 +103,26 @@ export default {
 
       if ((this.invalidNameInput && this.invalidRatingInput) === false) {
         let entry = {
-          id: this.surveyResults.length + 1,
+          id: this.countNumber+1,
           name: this.enteredName,
           rating: this.rating,
         };
 
         // let newSurvey = [];
         // newSurvey = [... this.surveyResults,entry]
-        this.surveyResults = [...this.surveyResults, entry];
+        //this.surveyResults = [...this.surveyResults, entry];
 
         //this.surveyResults.push(entry);
         // console.log(`${this.surveyResults[this.surveyResults.length-1].id}`);
         // console.log(`${this.surveyResults[this.surveyResults.length-1].name}`);
         // console.log(`${this.surveyResults[this.surveyResults.length-1].rating}`);
 
-        this.$emit("survey-results", this.surveyResults);
+        this.$emit("submit-survey", entry);
       }
     },
     validateName() {
       this.invalidNameInput = this.enteredName === "" ? true : false;
     },
-    async fetchSurveyResult() {
-      const res = await fetch("http://localhost:5000/surveyResults");
-      const data = await res.json();
-      return data;
-    },
-  },
-  async created() {
-    this.surveyResults = await this.fetchSurveyResult();
   },
   //   watch: {
   //     fetchSurveyResults() {

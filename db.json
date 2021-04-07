@@ -1,12 +1,6 @@
 {
   "surveyResults": [
     { "id": 1, "name": "Umaporn", "rating": "Great" },
-    { "id": 2, "name": "Suda", "rating": "Average" }
-  ]
-}
-{
-  "surveyResults": [
-    { "id": 1, "name": "Umaporn", "rating": "Great" },
     { "id": 2, "name": "Suda", "rating": "Average" },
     { "id": 3, "name": "Lucky", "rating": "Average" },
     { "id": 4, "name": "Jeab", "rating": "Great" },
