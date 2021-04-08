@@ -47,7 +47,8 @@ export default {
         //   name: 'Suda',
         //   rating: 'Average'
         // }
-      ]
+      ],
+       url : 'http://localhost:5000/surveyResults'
     }
   },
   methods: {
@@ -55,17 +56,33 @@ export default {
       this.surveyResults.id = new Date().toISOString()
       this.surveyResults.name = newSurvey.name
       this.surveyResults.id = newSurvey.rating
-      this.surveyResults.push(newSurvey)
+      //this.surveyResults.push(newSurvey)
+      this.postSurveyResult(newSurvey)
+     // vm.$forceUpdate();
+
     },
     async fetchSurveyResult() {
-      const res = await fetch('http://localhost:5000/surveyResults')
+      const res = await fetch(this.url)
       const data = await res.json()
       // parses JSON response into native JavaScript objects
       return data
-    }
+    },
+    async postSurveyResult(newSurvey) {
+      await fetch(this.url,{
+        method : 'POST',
+        headers : {
+          'Content-type' : 'application/json' 
+        },
+        body : JSON.stringify({
+          'name': newSurvey.name,
+          'rating' : newSurvey.rating
+        })
+      })
+      
+    },
   },
   async created() {
-    this.surveyResults = await this.fetchSurveyResult()
+    this.surveyResults = await this.fetchSurveyResult(this.url)
   }
 }
 </script>

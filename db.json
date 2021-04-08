@@ -1,6 +1,19 @@
 {
   "surveyResults": [
-    { "id": 1, "name": "Umaporn", "rating": "Great" },
-    { "id": 2, "name": "Suda", "rating": "Average" }
+    {
+      "id": 1,
+      "name": "Umaporn",
+      "rating": "Great"
+    },
+    {
+      "id": 2,
+      "name": "Suda",
+      "rating": "Average"
+    },
+    {
+      "name": "luckyหล่อเท่",
+      "rating": "great",
+      "id": 3
+    }
   ]
 }
