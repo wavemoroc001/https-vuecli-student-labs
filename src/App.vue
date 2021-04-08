@@ -32,7 +32,8 @@
                 <base-button
                   bgcolor="bg-red-600"
                   txtcolor="text-white"
-                  label="x"
+                  label="DELETE!"
+                  @click="deleteSurvey(result.id)"
                 ></base-button>
               </div>
             </div>
@@ -44,17 +45,17 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import AddSurvey from './components/survey/AddSurvey.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import AddSurvey from "./components/survey/AddSurvey.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
-    AddSurvey
+    AddSurvey,
   },
   data() {
     return {
-      url: ' http://localhost:5000/surveyResults',
+      url: " http://localhost:5000/surveyResults",
       errorMessage: null,
       surveyResults: [
         // {
@@ -67,8 +68,8 @@ export default {
         //   name: 'Suda',
         //   rating: 'Average'
         // }
-      ]
-    }
+      ],
+    };
   },
   methods: {
     ///*add to variable in memory
@@ -114,31 +115,41 @@ export default {
     ///* or alternatilly using async-await
     async addNewSurvey(newSurvey) {
       const res = await fetch(this.url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-type': 'application/json'
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           name: newSurvey.name,
-          rating: newSurvey.rating
-        })
-      })
-      const data = await res.json()
+          rating: newSurvey.rating,
+        }),
+      });
+      const data = await res.json();
       //spread array
-      this.surveyResults = [...this.surveyResults, data]
+      this.surveyResults = [...this.surveyResults, data];
       //or add new item to the end of array
       // this.surveyResults.push(data)
     },
 
     async fetchSurveyResult() {
-      const res = await fetch(this.url)
-      const data = await res.json()
+      const res = await fetch(this.url);
+      const data = await res.json();
       // parses JSON response into native JavaScript objects
-      return data
-    }
+      return data;
+    },
+    async deleteSurvey(id) {
+      const res = await fetch(`${this.url}/${id}`, {
+        method: "DELETE",
+      });
+      res.status === 200
+        ? (this.surveyResults = this.surveyResults.filter(
+            (survey) => survey.id != id
+          ))
+        : alert("DELETE MAI DAI");
+    },
   },
   async created() {
-    this.surveyResults = await this.fetchSurveyResult()
-  }
-}
+    this.surveyResults = await this.fetchSurveyResult();
+  },
+};
 </script>
